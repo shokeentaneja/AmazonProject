@@ -1,15 +1,18 @@
 package AmazonProject.AmazonProject1;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage 
+import Utility.DDT;
+import Utility.WaitUtil;
+
+
+public class LoginPage extends DDT
 {
 	WebDriver driver;
 	@FindBy(id="ap_email_login")
-	private WebElement Username;
+	private WebElement username;
 	
 	@FindBy(xpath="//input[@type='submit']")
 	private WebElement continuebutton;
@@ -18,14 +21,14 @@ public class LoginPage
 	private WebElement validpassword;
 	
 	@FindBy(xpath="//input[@type='submit']")
-	private WebElement signin;
+	private WebElement submitButton;
 	
 	@FindBy(id = "nav-link-accountList-nav-line-1")
 	private WebElement accountText;
 	
 	public void withValidEmailId()
 	{
-		Username.sendKeys("shokeentaneja06@gmail.com");
+		username.sendKeys(username1);
 	}
 	
 	public void clickoncontinue()
@@ -35,12 +38,14 @@ public class LoginPage
 	
 	public void withValidPassword()
 	{
-		validpassword.sendKeys("Avir@12345");
+		validpassword.sendKeys(password1);
 	}
 	
 	public void clickOnsubmitButton()
 	{
-		signin.click();
+		WaitUtil.waitForElementClickable(driver, submitButton, 10).click();
+		//signin.click();
+		
 	}
 	
 	public String getLoggedInUserText() 
@@ -52,4 +57,5 @@ public class LoginPage
 		this.driver=driver;
 		PageFactory.initElements(driver,this);
 	}
+	
 }

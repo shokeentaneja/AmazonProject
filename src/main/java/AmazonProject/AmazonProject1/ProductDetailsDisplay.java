@@ -14,14 +14,13 @@ public class ProductDetailsDisplay
 {
 	WebDriver driver;
 	
-	
-	@FindBy(xpath="//span[text()=' Customer Reviews: ']")
+	@FindBy(xpath="//div[contains(@class,'a-fixed-left-grid-col a-col-left')]/i[@data-hook='average-star-rating']/span")
 	private WebElement content;
 	
 	@FindBy(xpath="//input[@title='Add to Shopping Cart']")
 	private WebElement addToCart;
 	
-	@FindBy(xpath="//input[@value='Proceed to checkout']")
+	@FindBy(xpath="//input[@name='proceedToRetailCheckout']")
 	private WebElement itemAddedInTheCart;
 	
 	public void listOfElement()
@@ -47,9 +46,22 @@ public class ProductDetailsDisplay
 		
 	}
 	
-	public boolean IsproductAddedInTheCart()
+	public boolean IsproductAddedInTheCart() throws InterruptedException
 	{
-	   return itemAddedInTheCart.isDisplayed();
+//		Set<String>pcid=driver.getWindowHandles();
+//		Iterator<String> id=pcid.iterator();
+//		id.next();
+//		String childid =id.next();
+//		driver.switchTo().window(childid);
+//		Thread.sleep(3000);
+		try
+		{
+			return itemAddedInTheCart.isDisplayed();
+		}
+		catch(Exception e)
+		{
+			return false;
+		}  
 	}
 	
 	public void scrollXY() throws InterruptedException
@@ -67,5 +79,4 @@ public class ProductDetailsDisplay
 		this.driver=driver;
 		PageFactory.initElements(driver,this);
 	}
-	
 }

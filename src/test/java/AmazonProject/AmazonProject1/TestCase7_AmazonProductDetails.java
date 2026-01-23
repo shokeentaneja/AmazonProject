@@ -1,22 +1,29 @@
 package AmazonProject.AmazonProject1;
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
 import Utility.BaseClass;
+import Utility.DDT;
 import Utility.ListenersLogic;
 import Utility.RetryLogic;
 
-@Listeners(ListenersLogic.class)
+//@Listeners(ListenersLogic.class)
 public class TestCase7_AmazonProductDetails extends BaseClass
 {
 	@Test(retryAnalyzer=RetryLogic.class)
-	public void ProductDetails() throws InterruptedException
+	public void ProductDetails() throws InterruptedException, EncryptedDocumentException, IOException
 	{
 		HomePage homepage=new HomePage(driver);
 		homepage.hoverover(driver);
 		homepage.clickToSignin();
+		//Fetch excel data
+		 DDT ddt = new DDT();
+	     ddt.data_Fetching();
 		
 		LoginPage loginpage= new LoginPage(driver);
 		loginpage.withValidEmailId();
@@ -26,7 +33,7 @@ public class TestCase7_AmazonProductDetails extends BaseClass
 		String actualText=loginpage.getLoggedInUserText();
 		//Assertion to validate successful login
         Assertion a1= new Assertion();
-        a1.assertEquals(driver.getTitle(), "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
+        a1.assertEquals(driver.getTitle(), "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in","title is not matching");
         Assert.assertTrue(actualText.contains("Hello, shokeen"),"User is not logged in");
 		
 		
@@ -39,10 +46,5 @@ public class TestCase7_AmazonProductDetails extends BaseClass
 		productdetails.scrollXY();
 		
 		productdetails.clickONAddToCart();
-		
-		
-		
-		
 	}
-	
 }

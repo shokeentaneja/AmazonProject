@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import Utility.WaitUtil;
+
 
 public class HomePage 
 {
@@ -27,9 +29,11 @@ public class HomePage
 	
 	public void clickToSignin()
 	{
-		WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+		/*WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(signin)).click();
-		//signin.click();	
+		//signin.click();	*/
+		WaitUtil.waitForElementClickable(driver, signin, 10).click();;
+		
 	}
 	
 	public HomePage(WebDriver driver)
